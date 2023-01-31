@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="EXT:rmnd_shortcut_params/Resources/Private/Language/locallang.xlf" product-name="rmnd_shortcut_params">
+        <header/>
+        <body>
+            <trans-unit id="shortcut_params">
+                <source>Shortcut Parameters</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
