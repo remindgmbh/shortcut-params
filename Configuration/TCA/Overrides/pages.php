@@ -3,7 +3,7 @@
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-defined('TYPO3_MODE') || die;
+defined('TYPO3') || die;
 
 ExtensionManagementUtility::addTCAcolumns(
     'pages',
@@ -12,7 +12,8 @@ ExtensionManagementUtility::addTCAcolumns(
             'exclude' => 0,
             'label' => 'LLL:EXT:rmnd_shortcut_params/Resources/Private/Language/locallang.xlf:shortcut_params',
             'config' => [
-                'type' => 'input',
+                'type' => 'text',
+                'renderType' => 'jsonForm',
             ],
         ],
     ]

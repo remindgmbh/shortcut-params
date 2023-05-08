@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Remind\ShortcutParams\Event\Listener\ModifyPageLinkConfigurationEventListener:
+    tags:
+      -
+        name: event.listener
