@@ -25,17 +25,19 @@ class ModifyPageLinkConfigurationEventListener
         $request = $this->getRequest();
 
         /** @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $frontendController */
-        $fontendController = $request->getAttribute('frontend.controller');
+        $frontendController = $request->getAttribute('frontend.controller');
 
-        // $event->getPage() doesn't contain '_SHORTCUT_ORIGINAL_PAGE_UID'
-        $page = $fontendController->page;
+        $originalPageUid = null;
 
-        if (isset($page['_SHORTCUT_ORIGINAL_PAGE_UID'])) {
+        if (isset($event->getPage()['_SHORTCUT_ORIGINAL_PAGE_UID'])) {
+            $originalPageUid = $event->getLinkDetails()['pageuid'];
+        } elseif (isset($frontendController->page['_SHORTCUT_ORIGINAL_PAGE_UID'])) {
             /** @var \TYPO3\CMS\Core\Routing\PageArguments $pageArguments */
             $pageArguments = $request->getAttribute('routing');
-
-            // $page contains wrong value for '_SHORTCUT_ORIGINAL_PAGE_UID'
             $originalPageUid = $pageArguments->getPageId();
+        }
+
+        if ($originalPageUid) {
             $originalPage = $this->pageRepository->getPage($originalPageUid);
 
             if ($originalPage['doktype'] === PageRepository::DOKTYPE_SHORTCUT) {
