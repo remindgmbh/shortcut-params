@@ -43,7 +43,7 @@ class ModifyPageLinkConfigurationEventListener
             if ($originalPage['doktype'] === PageRepository::DOKTYPE_SHORTCUT) {
                 $shortcutParams = $originalPage['shortcut_params'] ?? null;
                 if ($shortcutParams) {
-                    $queryParameters = json_decode($shortcutParams, true);
+                    $queryParameters = json_decode($shortcutParams, true) ?? [];
                     $event->setQueryParameters($queryParameters);
                 }
             }
