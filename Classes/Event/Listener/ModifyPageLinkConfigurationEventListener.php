@@ -15,26 +15,32 @@ class ModifyPageLinkConfigurationEventListener
     ) {
     }
 
-    private function getRequest(): ServerRequestInterface
+    private function getRequest(): ?ServerRequestInterface
     {
-        return $GLOBALS['TYPO3_REQUEST'];
+        return $GLOBALS['TYPO3_REQUEST'] ?? null;
     }
 
     public function __invoke(ModifyPageLinkConfigurationEvent $event): void
     {
         $request = $this->getRequest();
 
-        /** @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $frontendController */
-        $frontendController = $request->getAttribute('frontend.controller');
+        if (!$request) {
+            return;
+        }
 
         $originalPageUid = null;
 
         if (isset($event->getPage()['_SHORTCUT_ORIGINAL_PAGE_UID'])) {
             $originalPageUid = $event->getLinkDetails()['pageuid'];
-        } elseif (isset($frontendController->page['_SHORTCUT_ORIGINAL_PAGE_UID'])) {
-            /** @var \TYPO3\CMS\Core\Routing\PageArguments $pageArguments */
-            $pageArguments = $request->getAttribute('routing');
-            $originalPageUid = $pageArguments->getPageId();
+        } else {
+            /** @var ?\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $frontendController */
+            $frontendController = $request->getAttribute('frontend.controller');
+
+            if (isset($frontendController?->page['_SHORTCUT_ORIGINAL_PAGE_UID'])) {
+                /** @var ?\TYPO3\CMS\Core\Routing\PageArguments $pageArguments */
+                $pageArguments = $request->getAttribute('routing');
+                $originalPageUid = $pageArguments?->getPageId();
+            }
         }
 
         if ($originalPageUid) {
