@@ -35,8 +35,6 @@
         "blueways/bw-jsoneditor": "^1.1"
     },
     "require-dev": {
-        "pdepend/pdepend": "^2.5.2",
-        "phpmd/phpmd": "^2.13.0",
         "slevomat/coding-standard": "^8.5",
         "squizlabs/php_codesniffer": "^3.7.1"
     },
@@ -51,20 +49,12 @@
     "extra": {
         "typo3/cms": {
             "cms-package-dir": "{$vendor-dir}/typo3/cms",
-            "app-dir": ".build",
             "web-dir": ".build/web",
             "extension-key": "rmnd_shortcut_params"
         }
     },
     "scripts": {
-        "pmd": "@php ./.build/vendor/phpmd/phpmd/src/bin/phpmd ./Classes ansi ./.build/phpmd.xml --ignore-violations-on-exit",
-        "pmd-xml": "@php ./.build/vendor/phpmd/phpmd/src/bin/phpmd ./Classes xml ./.build/phpmd.xml --reportfile ./.build/logs/pmd.xml --ignore-violations-on-exit",
-        "phpcs": "@php ./.build/vendor/squizlabs/php_codesniffer/bin/phpcs --standard=.build/phpcs.xml --extensions=php --ignore=.build --report=full .",
-        "phpcbf": "@php ./.build/vendor/squizlabs/php_codesniffer/bin/phpcbf --standard=.build/phpcs.xml --extensions=php --ignore=.build .",
-        "static-analysis": [
-            "@pmd",
-            "@pmd-xml",
-            "@phpcs"
-        ]
+        "phpcs": "@php ./.build/bin/phpcs --standard=.build/phpcs.xml --extensions=php --ignore=.build --report=full -n .",
+        "phpcbf": "@php ./.build/bin/phpcbf --standard=.build/phpcs.xml --extensions=php --ignore=.build ."
     }
 }
