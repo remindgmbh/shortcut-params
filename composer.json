@@ -30,9 +30,9 @@
         }
     },
     "require": {
-        "php": "^8.2",
-        "typo3/cms-core": "^12.4",
-        "blueways/bw-jsoneditor": "^1.1"
+        "php": "^8",
+        "typo3/cms-core": "^13.4",
+        "blueways/bw-jsoneditor": "^2.0"
     },
     "require-dev": {
         "slevomat/coding-standard": "^8.5",
