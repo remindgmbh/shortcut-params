@@ -17,3 +17,6 @@ cache.properties
 .build/vendor/
 .build/web/
 coverage.xml
+
+### PHPUnit ###
+/.phpunit.cache
